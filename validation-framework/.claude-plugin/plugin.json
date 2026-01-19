@@ -1,0 +1,15 @@
+{
+  "name": "validation-framework",
+  "version": "1.0.0",
+  "description": "Universal validation framework implementing Boris Cherny's principles 12 & 13 for 2-3x quality improvement",
+  "author": {
+    "name": "Claude Workflow Team"
+  },
+  "keywords": [
+    "validation",
+    "testing",
+    "quality",
+    "boris-cherny",
+    "feedback-loop"
+  ]
+}

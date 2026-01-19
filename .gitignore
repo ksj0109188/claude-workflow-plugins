@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/
+
+# Test files
+test-output/
+.test-results/
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Claude Code cache
+.claude/
+
+# Node modules (if any plugin needs them)
+node_modules/
