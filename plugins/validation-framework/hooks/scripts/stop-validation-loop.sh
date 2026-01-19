@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -eo pipefail  # 'u' 제거: unbound variable 허용
 
 # === 설정 ===
 STATE_FILE="$HOME/.claude/validation-loop.local.md"
@@ -15,10 +15,27 @@ log() {
 
 log "=== Stop Hook triggered ==="
 
+# === 환경변수 체크 ===
+if [ -z "${TRANSCRIPT:-}" ]; then
+    log "No TRANSCRIPT variable - normal session end"
+    exit 0
+fi
+
+# === Promise 추출 (macOS 호환) ===
+extract_promise() {
+    echo "${1:-}" | sed -n 's/.*<promise>\([^<]*\)<\/promise>.*/\1/p' | tail -1
+}
+
 # === 상태 파일 확인 ===
 if [ ! -f "$STATE_FILE" ]; then
     log "First run - checking for failure"
-    PROMISE=$(echo "$TRANSCRIPT" | grep -oP '<promise>\K[^<]+' | tail -1)
+    PROMISE=$(extract_promise "$TRANSCRIPT")
+
+    # Promise 태그가 없으면 일반 세션 - 즉시 종료
+    if [ -z "$PROMISE" ]; then
+        log "No promise tag found - normal session end"
+        exit 0
+    fi
 
     if [ "$PROMISE" == "VALIDATION_FAILED" ]; then
         log "Validation failed on first run. Starting loop."
@@ -57,7 +74,15 @@ fi
 
 # === 루프 중 ===
 ITERATION=$(awk '/^iteration:/ {print $2}' "$STATE_FILE")
-PROMISE=$(echo "$TRANSCRIPT" | grep -oP '<promise>\K[^<]+' | tail -1)
+PROMISE=$(extract_promise "$TRANSCRIPT")
+
+# Promise 태그가 없으면 루프 종료 (안전장치)
+if [ -z "$PROMISE" ]; then
+    log "No promise tag in loop - cleaning up and exiting"
+    rm -f "$STATE_FILE"
+    [ -d "$TEMP_DIR" ] && rm -rf "$TEMP_DIR"
+    exit 0
+fi
 
 log "Loop iteration: $ITERATION, Promise: $PROMISE"
 
