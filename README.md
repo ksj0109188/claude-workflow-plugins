@@ -15,10 +15,10 @@
 
 **설치:**
 ```bash
-cc plugin install github:ksj0109188/claude-workflow-plugins/validation-framework
+cc --plugin-dir ~/path/to/claude-workflow-plugins/plugins/validation-framework
 ```
 
-**문서:** [validation-framework/README.md](./validation-framework/README.md)
+**문서:** [plugins/validation-framework/README.md](./plugins/validation-framework/README.md)
 
 ---
 
@@ -30,22 +30,22 @@ cc plugin install github:ksj0109188/claude-workflow-plugins/validation-framework
 git clone https://github.com/ksj0109188/claude-workflow-plugins.git
 ```
 
-### 특정 플러그인만 설치
+### 특정 플러그인만 로드
 
 ```bash
 # Validation Framework
-cc plugin install github:ksj0109188/claude-workflow-plugins/validation-framework
+cc --plugin-dir ~/claude-workflow-plugins/plugins/validation-framework
 ```
 
 ### 로컬 개발 모드
 
 ```bash
 # 특정 플러그인 테스트
-cc --plugin-dir ./claude-workflow-plugins/validation-framework
+cc --plugin-dir ./claude-workflow-plugins/plugins/validation-framework
 
-# 전체 플러그인 테스트
-cc --plugin-dir ./claude-workflow-plugins/validation-framework \
-   --plugin-dir ./claude-workflow-plugins/[other-plugin]
+# 여러 플러그인 동시 로드
+cc --plugin-dir ./claude-workflow-plugins/plugins/validation-framework \
+   --plugin-dir ./claude-workflow-plugins/plugins/[other-plugin]
 ```
 
 ---
@@ -82,22 +82,24 @@ git push
 ### 플러그인 구조 예시
 
 ```
-validation-framework/
-├── .claude-plugin/
-│   └── plugin.json          # 메타데이터
-├── README.md                 # 플러그인 문서
-├── commands/
-│   └── validate.md           # /validate 커맨드
-├── agents/
-│   ├── project-detector.md  # 프로젝트 감지
-│   ├── validator.md          # 검증 실행
-│   └── report-generator.md  # 리포트 생성
-├── skills/
-│   └── validate/
-│       └── SKILL.md          # 스킬 오케스트레이션
-└── hooks/
-    ├── hooks.json            # 훅 정의
-    └── scripts/              # 훅 스크립트
+claude-workflow-plugins/
+└── plugins/                    # ← 필수 디렉토리
+    └── validation-framework/
+        ├── .claude-plugin/
+        │   └── plugin.json     # 메타데이터
+        ├── README.md           # 플러그인 문서
+        ├── commands/
+        │   └── validate.md     # /validate 커맨드
+        ├── agents/
+        │   ├── project-detector.md
+        │   ├── validator.md
+        │   └── report-generator.md
+        ├── skills/
+        │   └── validate/
+        │       └── SKILL.md
+        └── hooks/
+            ├── hooks.json
+            └── scripts/
 ```
 
 ---
