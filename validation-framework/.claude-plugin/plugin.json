@@ -1,6 +1,6 @@
 {
   "name": "validation-framework",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Validation framework implementing Boris Cherny's principles #12 & #13 for 2-3x quality improvement through validation feedback loops",
   "author": {
     "name": "ksj0109188",
