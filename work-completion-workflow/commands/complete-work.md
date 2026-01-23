@@ -7,7 +7,18 @@ examples:
   - "finish session"
 ---
 
-# Complete Work Command
+You are executing the `/complete-work` command. Your task is to invoke the `complete-work` skill using the Skill tool.
+
+Use the Skill tool with:
+- skill: "work-completion-workflow:complete-work"
+
+The skill will orchestrate the 4-stage workflow: memory update → deep review → file cleanup → git commit.
+
+Do NOT provide any explanation or introduction - immediately invoke the skill.
+
+---
+
+# Complete Work Command (Documentation)
 
 Runs the complete work workflow: memory update → deep review → file cleanup → git commit.
 
