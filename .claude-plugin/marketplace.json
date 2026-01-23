@@ -17,9 +17,7 @@
       },
       "source": "./validation-framework",
       "category": "development",
-      "tags": ["validation", "testing", "quality", "automation", "boris-cherny"],
-      "strict": false,
-      "readme": "./validation-framework/README.md"
+      "homepage": "https://github.com/ksj0109188/claude-workflow-plugins/tree/master/validation-framework"
     }
   ]
 }
