@@ -51,28 +51,57 @@ ln -s "$(pwd)/validation-framework" ~/.claude/plugins/
 
 ## 🚀 빠른 시작
 
-### 전체 저장소 클론
+### 방법 1: Marketplace를 통한 설치 (권장)
 
+**1단계: Marketplace 추가**
+```bash
+/plugin marketplace add ksj0109188/claude-workflow-plugins
+```
+
+**2단계: 플러그인 설치**
+```bash
+# Work Completion Workflow 설치
+/plugin install work-completion-workflow@claude-workflow-plugins
+
+# Validation Framework 설치
+/plugin install validation-framework@claude-workflow-plugins
+```
+
+**3단계: 사용**
+```
+/complete-work
+/validate
+```
+
+---
+
+### 방법 2: 수동 설치
+
+**전체 저장소 클론**
 ```bash
 git clone https://github.com/ksj0109188/claude-workflow-plugins.git
+cd claude-workflow-plugins
+
+# Work Completion Workflow 설치
+ln -s "$(pwd)/work-completion-workflow" ~/.claude/plugins/
+
+# Validation Framework 설치
+ln -s "$(pwd)/validation-framework" ~/.claude/plugins/
 ```
 
-### 특정 플러그인만 로드
-
+**특정 플러그인만 로드**
 ```bash
-# Validation Framework
-cc --plugin-dir ~/claude-workflow-plugins/plugins/validation-framework
+cc --plugin-dir ~/claude-workflow-plugins/work-completion-workflow
 ```
 
-### 로컬 개발 모드
-
+**로컬 개발 모드**
 ```bash
 # 특정 플러그인 테스트
-cc --plugin-dir ./claude-workflow-plugins/plugins/validation-framework
+cc --plugin-dir ./work-completion-workflow
 
 # 여러 플러그인 동시 로드
-cc --plugin-dir ./claude-workflow-plugins/plugins/validation-framework \
-   --plugin-dir ./claude-workflow-plugins/plugins/[other-plugin]
+cc --plugin-dir ./work-completion-workflow \
+   --plugin-dir ./validation-framework
 ```
 
 ---
@@ -176,6 +205,28 @@ MIT License - 자유롭게 사용, 수정, 배포 가능
 3. Commit your changes (`git commit -m 'Add amazing plugin'`)
 4. Push to the branch (`git push origin feature/amazing-plugin`)
 5. Open a Pull Request
+
+---
+
+## 🌐 Marketplace
+
+이 저장소는 Claude Code Marketplace로 사용할 수 있습니다.
+
+### 자체 호스팅 Marketplace
+```bash
+# Marketplace 추가
+/plugin marketplace add ksj0109188/claude-workflow-plugins
+
+# 플러그인 설치
+/plugin install work-completion-workflow@claude-workflow-plugins
+/plugin install validation-framework@claude-workflow-plugins
+```
+
+### 공식 Marketplace 제출
+공식 Anthropic Marketplace에 제출하려면:
+- [Plugin Directory Submission Form](https://clau.de/plugin-directory-submission)
+- 품질 및 보안 기준 충족 필요
+- 승인 후 `/plugin search` 에서 검색 가능
 
 ---
 

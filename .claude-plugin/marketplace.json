@@ -1,23 +1,32 @@
 {
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "claude-workflow-plugins",
-  "description": "Custom Claude Code plugins for workflow automation and quality improvement",
   "owner": {
     "name": "ksj0109188",
-    "email": "ksj0109188@gmail.com"
+    "email": "[email protected]"
+  },
+  "metadata": {
+    "description": "Production-grade workflow automation plugins for Claude Code",
+    "version": "1.0.0",
+    "pluginRoot": "."
   },
   "plugins": [
     {
-      "name": "validation-framework",
-      "description": "Universal validation framework implementing Boris Cherny's principles 12 & 13 for 2-3x quality improvement. Provides automated validation feedback loops with intelligent failure analysis, self-correction, and detailed reporting.",
+      "name": "work-completion-workflow",
+      "source": "./work-completion-workflow",
+      "description": "4-stage workflow for completing work sessions: Memory → Review → Cleanup → Commit",
       "version": "1.0.0",
       "author": {
-        "name": "Claude Workflow Team",
-        "email": "ksj0109188@gmail.com"
-      },
-      "source": "./plugins/validation-framework",
-      "category": "development",
-      "homepage": "https://github.com/ksj0109188/claude-workflow-plugins/tree/master/validation-framework"
+        "name": "ksj0109188"
+      }
+    },
+    {
+      "name": "validation-framework",
+      "source": "./validation-framework",
+      "description": "Universal validation framework implementing Boris Cherny's principles #12 & #13",
+      "version": "1.0.0",
+      "author": {
+        "name": "ksj0109188"
+      }
     }
   ]
 }
