@@ -21,6 +21,30 @@ Comprehensive work completion workflow that orchestrates memory update, deep cod
 - 2-year archive retention policy
 - Preserves all changes in `.archive/` with MANIFEST
 
+## Installation
+
+### Prerequisites
+
+This plugin requires the following official plugins:
+
+```bash
+# Install pr-review-toolkit (required for deep code review)
+/plugin install pr-review-toolkit@claude-code-plugins
+```
+
+**Why required?** The Deep Review step (Step 2/4) uses all 6 pr-review-toolkit agents:
+- code-reviewer, silent-failure-hunter, pr-test-analyzer
+- type-design-analyzer, comment-analyzer, code-simplifier
+
+Without pr-review-toolkit, `/complete-work` will fail at Step 2.
+
+### Install work-completion-workflow
+
+```bash
+/plugin marketplace add ksj0109188/claude-workflow-plugins
+/plugin install work-completion-workflow@claude-workflow-plugins
+```
+
 ## Usage
 
 ```bash
@@ -99,9 +123,13 @@ patterns:
 ## Integration
 
 ### Dependencies
-- `update-memory` plugin (or built-in command)
-- `pr-review-toolkit` plugin (6 agents)
-- `commit-commands` plugin
+
+**Required**:
+- `pr-review-toolkit@claude-code-plugins` - 6 review agents (code-reviewer, silent-failure-hunter, pr-test-analyzer, type-design-analyzer, comment-analyzer, code-simplifier)
+
+**Optional** (built-in alternatives available):
+- `update-memory` plugin (or built-in /update-memory command)
+- `commit-commands` plugin (or built-in git commands)
 
 ### Workflow State
 

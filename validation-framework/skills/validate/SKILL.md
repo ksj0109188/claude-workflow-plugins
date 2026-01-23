@@ -32,11 +32,12 @@ This skill orchestrates the complete validation workflow by coordinating special
 
 Launch the **project-detector agent** to identify the project:
 
-Use Task tool to call project-detector agent with prompt:
-"Scan the current project and identify:
-- Project type (nodejs/python/rust/go)
-- Available validation commands (test/lint/typecheck/build)
-- Return structured JSON with findings"
+Use Task tool with:
+- subagent_type: validation-framework:project-detector
+- prompt: "Scan the current project and identify:
+  - Project type (nodejs/python/rust/go)
+  - Available validation commands (test/lint/typecheck/build)
+  - Return structured JSON with findings"
 
 Expected output: JSON with project info
 
@@ -44,16 +45,17 @@ Expected output: JSON with project info
 
 Launch the **validator agent** with project context:
 
-Use Task tool to call validator agent with prompt:
-"Execute validation for [project_type] project:
-- Run available commands: [commands_list]
-- Capture full output (stdout/stderr)
-- Extract file:line locations
-- Analyze Expected vs Received patterns
-- Identify root causes
-- Generate fix suggestions
+Use Task tool with:
+- subagent_type: validation-framework:validator
+- prompt: "Execute validation for [project_type] project:
+  - Run available commands: [commands_list]
+  - Capture full output (stdout/stderr)
+  - Extract file:line locations
+  - Analyze Expected vs Received patterns
+  - Identify root causes
+  - Generate fix suggestions
 
-Project info: [JSON from step 1]"
+  Project info: [JSON from step 1]"
 
 **Important**: The validator implements Boris principle #13 by providing exact validation results, enabling self-correction.
 
@@ -63,14 +65,15 @@ Expected output: Structured validation results with failures
 
 Launch the **report-generator agent** with validation results:
 
-Use Task tool to call report-generator agent with prompt:
-"Create user-friendly validation report:
-- Summary with ✅/❌ status
-- Detailed failure information with locations
-- Actionable fix suggestions
-- Next steps and re-validation commands
+Use Task tool with:
+- subagent_type: validation-framework:report-generator
+- prompt: "Create user-friendly validation report:
+  - Summary with ✅/❌ status
+  - Detailed failure information with locations
+  - Actionable fix suggestions
+  - Next steps and re-validation commands
 
-Validation data: [JSON from step 2]"
+  Validation data: [JSON from step 2]"
 
 Expected output: Formatted markdown report
 

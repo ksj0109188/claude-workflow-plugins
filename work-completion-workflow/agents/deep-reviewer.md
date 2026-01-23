@@ -39,15 +39,15 @@ Launch agents sequentially for better context flow:
 ### 1. code-reviewer (Baseline Quality)
 
 ```markdown
-Use Task tool to launch code-reviewer agent:
+Use Task tool with:
+- subagent_type: pr-review-toolkit:code-reviewer
+- prompt: "Review git diff (unstaged + staged changes) for:
+  - CLAUDE.md compliance
+  - Bug detection
+  - Code quality issues
+  - Only report findings with confidence ≥ 80%
 
-"Review git diff (unstaged + staged changes) for:
-- CLAUDE.md compliance
-- Bug detection
-- Code quality issues
-- Only report findings with confidence ≥ 80%
-
-Return structured JSON with findings."
+  Return structured JSON with findings."
 ```
 
 **Expected Output**:
@@ -62,15 +62,15 @@ Return structured JSON with findings."
 ### 2. silent-failure-hunter (Error Handling)
 
 ```markdown
-Use Task tool to launch silent-failure-hunter agent:
+Use Task tool with:
+- subagent_type: pr-review-toolkit:silent-failure-hunter
+- prompt: "Analyze git diff for:
+  - Empty catch blocks
+  - Silent error suppression
+  - Inadequate error logging
+  - Inappropriate fallbacks
 
-"Analyze git diff for:
-- Empty catch blocks
-- Silent error suppression
-- Inadequate error logging
-- Inappropriate fallbacks
-
-Categorize by severity: CRITICAL, HIGH, MEDIUM."
+  Categorize by severity: CRITICAL, HIGH, MEDIUM."
 ```
 
 **Expected Output**:
@@ -85,14 +85,14 @@ Categorize by severity: CRITICAL, HIGH, MEDIUM."
 ### 3. pr-test-analyzer (Test Coverage)
 
 ```markdown
-Use Task tool to launch pr-test-analyzer agent:
+Use Task tool with:
+- subagent_type: pr-review-toolkit:pr-test-analyzer
+- prompt: "Analyze test coverage for git diff:
+  - Identify critical test gaps
+  - Rate gap severity (1-10)
+  - Gaps rated ≥ 8 are CRITICAL
 
-"Analyze test coverage for git diff:
-- Identify critical test gaps
-- Rate gap severity (1-10)
-- Gaps rated ≥ 8 are CRITICAL
-
-Return gap analysis with ratings."
+  Return gap analysis with ratings."
 ```
 
 **Expected Output**:
@@ -116,17 +116,17 @@ git diff --unified=0 | grep -E "^\+.*\b(type|interface|class)\s"
 If yes, launch agent:
 
 ```markdown
-Use Task tool to launch type-design-analyzer agent:
+Use Task tool with:
+- subagent_type: pr-review-toolkit:type-design-analyzer
+- prompt: "Analyze new/modified types in git diff:
+  - Rate on 4 dimensions (1-10):
+    - Encapsulation
+    - Invariant expression
+    - Usefulness
+    - Enforcement
+  - Low scores (≤ 4) = Important Issue
 
-"Analyze new/modified types in git diff:
-- Rate on 4 dimensions (1-10):
-  - Encapsulation
-  - Invariant expression
-  - Usefulness
-  - Enforcement
-- Low scores (≤ 4) = Important Issue
-
-Return ratings with explanations."
+  Return ratings with explanations."
 ```
 
 **Expected Output**:
@@ -161,14 +161,14 @@ git diff --unified=0 | grep -E "^\+.*(/\*|//|#)"
 If yes, launch agent:
 
 ```markdown
-Use Task tool to launch comment-analyzer agent:
+Use Task tool with:
+- subagent_type: pr-review-toolkit:comment-analyzer
+- prompt: "Analyze modified comments in git diff:
+  - Check accuracy against code
+  - Identify outdated comments
+  - Flag misleading documentation
 
-"Analyze modified comments in git diff:
-- Check accuracy against code
-- Identify outdated comments
-- Flag misleading documentation
-
-Return comment issues."
+  Return comment issues."
 ```
 
 **Expected Output**:
@@ -185,14 +185,14 @@ Return comment issues."
 **Run ONLY if**: No critical issues from agents 1-5
 
 ```markdown
-Use Task tool to launch code-simplifier agent:
+Use Task tool with:
+- subagent_type: pr-review-toolkit:code-simplifier
+- prompt: "Provide refactoring suggestions for git diff:
+  - Reduce complexity
+  - Improve readability
+  - Suggest abstractions
 
-"Provide refactoring suggestions for git diff:
-- Reduce complexity
-- Improve readability
-- Suggest abstractions
-
-Return suggestions (NOT blocking issues)."
+  Return suggestions (NOT blocking issues)."
 ```
 
 **Expected Output**:
