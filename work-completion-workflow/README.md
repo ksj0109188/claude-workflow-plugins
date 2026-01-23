@@ -23,6 +23,12 @@ Comprehensive work completion workflow that orchestrates memory update, deep cod
 
 ## Installation
 
+### ⚠️ Important: Manual Dependency Installation Required
+
+**Claude Code does NOT automatically install plugin dependencies.**
+
+You MUST manually install `pr-review-toolkit` BEFORE installing this plugin, or `/complete-work` will fail at Step 2.
+
 ### Prerequisites
 
 This plugin requires the following official plugins:
@@ -36,13 +42,39 @@ This plugin requires the following official plugins:
 - code-reviewer, silent-failure-hunter, pr-test-analyzer
 - type-design-analyzer, comment-analyzer, code-simplifier
 
-Without pr-review-toolkit, `/complete-work` will fail at Step 2.
+**What happens without it?**
+```
+/complete-work
+✅ [Step 1/4] Memory Update - Success
+❌ [Step 2/4] Deep Review - Error: pr-review-toolkit:code-reviewer not found
+⏸️  Workflow stopped
+```
 
-### Install work-completion-workflow
+### Installation Steps (In Order!)
 
+**Step 1: Install pr-review-toolkit (Required)**
+```bash
+/plugin install pr-review-toolkit@claude-code-plugins
+```
+
+**Step 2: Add marketplace**
 ```bash
 /plugin marketplace add ksj0109188/claude-workflow-plugins
+```
+
+**Step 3: Install work-completion-workflow**
+```bash
 /plugin install work-completion-workflow@claude-workflow-plugins
+```
+
+**Step 4: Verify installation**
+```bash
+# Check both plugins are installed
+/plugin list
+
+# Expected output should include:
+# - pr-review-toolkit@claude-code-plugins
+# - work-completion-workflow@claude-workflow-plugins
 ```
 
 ## Usage
