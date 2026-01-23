@@ -1,0 +1,57 @@
+name: Validate Plugins
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    name: Validate Plugin Structure and Integration
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+
+      - name: Run structure validation
+        id: validate
+        run: |
+          echo "Running plugin structure validation..."
+          bash tests/validate.sh
+
+      - name: Run integration tests
+        id: integration
+        run: |
+          echo "Running integration tests..."
+          bash tests/integration-test.sh
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Validation Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ steps.validate.outcome }}" == "success" ]; then
+            echo "✅ **Structure Validation**: PASSED" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Structure Validation**: FAILED" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ "${{ steps.integration.outcome }}" == "success" ]; then
+            echo "✅ **Integration Tests**: PASSED" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Integration Tests**: FAILED" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "See step logs above for details." >> $GITHUB_STEP_SUMMARY

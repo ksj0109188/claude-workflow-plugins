@@ -23,5 +23,9 @@ test-output/
 # Claude Code cache
 .claude/
 
+# Work completion workflow state files
+work-completion.local.md
+cleanup-patterns.local.md
+
 # Node modules (if any plugin needs them)
 node_modules/

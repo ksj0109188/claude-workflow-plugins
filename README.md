@@ -1,10 +1,36 @@
 # Claude Workflow Plugins
 
+[![Validate Plugins](https://github.com/ksj0109188/claude-workflow-plugins/actions/workflows/validate-plugins.yml/badge.svg)](https://github.com/ksj0109188/claude-workflow-plugins/actions/workflows/validate-plugins.yml)
+
 프로덕션급 워크플로우 자동화를 위한 Claude Code 플러그인 컬렉션
 
 ## 📦 포함된 플러그인
 
-### 1. Validation Framework
+### 1. Work Completion Workflow
+**4-stage workflow for completing work sessions: Memory → Review → Cleanup → Commit**
+
+- ✅ 자동 메모리 업데이트 (`.claude/memory/`)
+- ✅ 6개 agent 딥 코드 리뷰 (pr-review-toolkit 통합)
+- ✅ 스마트 파일 클린업 (패턴 학습)
+- ✅ Git 자동 커밋 (commit-commands 통합)
+- ✅ Critical 이슈 자동 차단 (Stop Hook)
+
+**설치:**
+```bash
+cd ~/claude-workflow-plugins
+ln -s "$(pwd)/work-completion-workflow" ~/.claude/plugins/
+```
+
+**사용:**
+```
+/complete-work
+```
+
+**문서:** [work-completion-workflow/README.md](./work-completion-workflow/README.md)
+
+---
+
+### 2. Validation Framework
 **Universal validation framework implementing Boris Cherny's principles #12 & #13**
 
 - ✅ 자동 프로젝트 감지 (Node.js, Python, Rust, Go)
@@ -15,10 +41,11 @@
 
 **설치:**
 ```bash
-cc --plugin-dir ~/path/to/claude-workflow-plugins/plugins/validation-framework
+cd ~/claude-workflow-plugins
+ln -s "$(pwd)/validation-framework" ~/.claude/plugins/
 ```
 
-**문서:** [plugins/validation-framework/README.md](./plugins/validation-framework/README.md)
+**문서:** [validation-framework/README.md](./validation-framework/README.md)
 
 ---
 
@@ -104,11 +131,33 @@ claude-workflow-plugins/
 
 ---
 
+## 🧪 테스트
+
+### 로컬 검증
+
+```bash
+# 구조 검증
+bash tests/validate.sh
+
+# 통합 테스트
+bash tests/integration-test.sh
+```
+
+### CI/CD
+
+모든 push와 PR은 자동으로 검증됩니다:
+- ✅ 플러그인 구조 검증
+- ✅ Agent/Skill/Hook 통합 테스트
+- ✅ Stop Hook promise tag 파싱 테스트
+
+---
+
 ## 🔧 요구사항
 
 - **Claude Code**: 2.1.0 이상
 - **Node.js**: 18+ (Node.js 프로젝트 검증 시)
 - **Python**: 3.8+ (Python 프로젝트 검증 시)
+- **jq**: JSON 파싱 (테스트 시 권장)
 
 ---
 

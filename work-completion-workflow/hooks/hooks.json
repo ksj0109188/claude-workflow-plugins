@@ -1,0 +1,9 @@
+{
+  "hooks": [
+    {
+      "event": "Stop",
+      "script": "scripts/stop-workflow-handler.sh",
+      "description": "Manages work completion workflow state and blocks on critical review issues"
+    }
+  ]
+}

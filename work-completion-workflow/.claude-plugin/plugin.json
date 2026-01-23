@@ -1,0 +1,9 @@
+{
+  "name": "work-completion-workflow",
+  "version": "1.0.0",
+  "description": "Complete work workflow: Memory update → Deep review → Smart cleanup → Git commit. Learns from user feedback for automation.",
+  "author": "Claude Code User",
+  "skills": ["complete-work"],
+  "agents": ["cleanup-learner"],
+  "hooks": []
+}
