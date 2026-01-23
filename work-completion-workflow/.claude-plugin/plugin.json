@@ -1,6 +1,6 @@
 {
   "name": "work-completion-workflow",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Complete work workflow: Memory update → Deep review → Smart cleanup → Git commit. Learns from user feedback for automation.",
   "author": {
     "name": "ksj0109188",

@@ -1,14 +1,25 @@
 {
-  "hooks": [
-    {
-      "event": "Stop",
-      "script": "scripts/stop-validation-loop.sh",
-      "description": "Manages validation retry loop and state cleanup (Boris principle #12)"
-    },
-    {
-      "event": "PreToolUse",
-      "script": "scripts/pre-tool-validation-context.py",
-      "description": "Injects validation history for feedback loop (Boris principle #13)"
-    }
-  ]
+  "description": "Validation framework hooks for Boris principles #12 & #13",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/stop-validation-loop.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/scripts/pre-tool-validation-context.py"
+          }
+        ]
+      }
+    ]
+  }
 }

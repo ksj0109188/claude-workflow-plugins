@@ -1,9 +1,15 @@
 {
-  "hooks": [
-    {
-      "event": "Stop",
-      "script": "scripts/stop-workflow-handler.sh",
-      "description": "Manages work completion workflow state and blocks on critical review issues"
-    }
-  ]
+  "description": "Work completion workflow hook - manages state and blocks on critical issues",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/stop-workflow-handler.sh"
+          }
+        ]
+      }
+    ]
+  }
 }
