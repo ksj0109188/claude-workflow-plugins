@@ -13,6 +13,9 @@
     ],
     "PreToolUse": [
       {
+        "matcher": {
+          "toolName": "Task"
+        },
         "hooks": [
           {
             "type": "command",

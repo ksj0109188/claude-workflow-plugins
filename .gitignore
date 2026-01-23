@@ -23,9 +23,16 @@ test-output/
 # Claude Code cache
 .claude/
 
+# Plugin state files (all *.local.md files)
+*.local.md
+.archive/
+
 # Work completion workflow state files
 work-completion.local.md
 cleanup-patterns.local.md
+
+# Validation framework state files
+validation-loop.local.md
 
 # Node modules (if any plugin needs them)
 node_modules/
