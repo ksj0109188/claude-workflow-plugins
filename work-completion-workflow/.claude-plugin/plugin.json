@@ -2,8 +2,12 @@
   "name": "work-completion-workflow",
   "version": "1.0.0",
   "description": "Complete work workflow: Memory update → Deep review → Smart cleanup → Git commit. Learns from user feedback for automation.",
-  "author": "Claude Code User",
-  "skills": ["complete-work"],
-  "agents": ["cleanup-learner"],
-  "hooks": []
+  "author": {
+    "name": "ksj0109188",
+    "email": "[email protected]",
+    "url": "https://github.com/ksj0109188"
+  },
+  "repository": "https://github.com/ksj0109188/claude-workflow-plugins",
+  "license": "MIT",
+  "keywords": ["workflow", "automation", "memory", "review", "cleanup", "commit"]
 }
