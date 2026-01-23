@@ -15,7 +15,7 @@
         "name": "Claude Workflow Team",
         "email": "ksj0109188@gmail.com"
       },
-      "source": "./validation-framework",
+      "source": "./plugins/validation-framework",
       "category": "development",
       "homepage": "https://github.com/ksj0109188/claude-workflow-plugins/tree/master/validation-framework"
     }
